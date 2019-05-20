@@ -34,7 +34,7 @@ rails s
 ER Diagram
 
 
-![ERD](/app/assets/images/modeling/ERD social network.jpeg)
+![ERD](app/assets/images/modeling/ERD.jpeg)
 
 
 
