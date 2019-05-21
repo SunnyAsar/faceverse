@@ -31,6 +31,13 @@ Start server
 rails s
 ```
 
+ER Diagram
+
+
+![ERD](app/assets/images/modeling/ERD.jpeg)
+
+
+
 ## Contributors
 
 - [Sunny Asar](https://github.com/SunnyAsar)
