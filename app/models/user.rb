@@ -13,4 +13,7 @@ class User < ApplicationRecord
 
   has_many :received_requests, class_name: 'FriendRequest', foreign_key: :receiver_id
   has_many :friends_requesting, through: :received_requests, source: :sender
+
+  has_many :friendships
+  has_many :friends, through: :friendships, source: :friend
 end
