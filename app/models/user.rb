@@ -17,4 +17,9 @@ class User < ApplicationRecord
 
   has_many :friendships
   has_many :friends, through: :friendships, source: :friend
+
+  has_many :likes, foreign_key: :liker_id
+
+  has_many :liked_posts, through: :likes, source: :likeable, source_type: "Post"
+  has_many :liked_comments, through: :likes, source: :likeable, source_type: "Comment"
 end
