@@ -1,20 +1,14 @@
 class Friendship < ApplicationRecord
-  after_create_commit :create_inverse_frienship
-  after_destroy_commit :destroy_inverse_frienship
+  # after_create_commit :create_inverse_frienship
+  # after_destroy_commit :destroy_inverse_frienship
+  before_create :order_params
 
   belongs_to :user
   belongs_to :friend, class_name: 'User'
 
-  # private
+  private
 
-  # def create_inverse_frienship
-  #   puts 'running after create callback'
-  #   Friendship.create(user_id: friend_id, friend_id: user_id) unless Friendship.where(user_id: friend_id, friend_id: user_id).any?
-  # end
-
-  # def destroy_inverse_frienship
-  #   puts 'running after destroy callback'
-  #   Friendship.where(user_id: friend_id, friend_id: user_id).first&.destroy
-  # end
-
+  def order_params
+    self.user_id, self.friend_id = friend_id, user_id if friend_id < user_id
+  end
 end
