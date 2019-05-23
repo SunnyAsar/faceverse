@@ -7,4 +7,14 @@ FactoryBot.define do
     password_confirmation {'foobar'}
   end
 
+  factory :post do
+    content { Faker::ChuckNorris.fact}
+    association :author, factory: :user
+  end
+
+  factory :friendship do 
+    association :user, factory: :user
+    association :friend, factory: :user
+  end
+
 end

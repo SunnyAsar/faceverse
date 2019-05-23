@@ -5,9 +5,13 @@ if Rails.env.development? || Rails.evn.test?
     desc "This will add some development data " 
       task populate: 'db:migrate:reset' do
         include FactoryBot::Syntax::Methods
-        create(:user, email: 's@me.com')
+        u = create(:user, email: 's@me.com')
+        create(:post, author: u)
         5.times do
-          create(:user)
+          create(:user) do |user|
+              2.times {user.posts.create(attributes_for :post)}
+              create(:friendship)
+          end
         end
       end
   end

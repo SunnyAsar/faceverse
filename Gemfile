@@ -10,7 +10,7 @@ gem 'devise'
 gem 'bootstrap-generators'
 gem 'devise-bootstrap-views'
 gem 'record_tag_helper'
-
+gem 'table_print'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'

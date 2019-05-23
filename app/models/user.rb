@@ -16,7 +16,8 @@ class User < ApplicationRecord
   has_many :friends_requesting, through: :received_requests, source: :sender
 
   has_many :friendships,  dependent: :destroy
-  has_many :friends, through: :friendships, source: :friend
+  has_many :direct_friends, through: :friendships, source: :friend
+  has_many :inverse_friends, through: :friendships, source: :user
 
   has_many :likes, foreign_key: :liker_id
 
@@ -28,9 +29,37 @@ class User < ApplicationRecord
 
 
 
-  def self.my_friends
-    # @friends = Friendship.where('user_id=?  OR friend_id=?', current_user.id)
-    # @friends = Friendship.where(user_id: user.id)
-    puts 'welcome to friends'
+
+
+
+  def friends
+    direct_friends + inverse_friends
   end
+
+
+
+
+
+  # def self.my_friends(user)
+  #   @friends = Friendship.where('user_id=?  OR friend_id=?', user.id, user.id)
+  #   ids = []
+  #   @friends.each do |friend|
+  #     if friend.user_id == user.id do
+  #       ids << friend.friend_id
+  #     elsif friend.friend_id == user.id
+  #       ids << friend.user_id
+  #     end
+  #   end
+
+
+
+  #   puts 'welcome to friends'
+  #   puts user.id
+  #   @friends
+
+  #   ids
+  # end
+
+
+
 end
