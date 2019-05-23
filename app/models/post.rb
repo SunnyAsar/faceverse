@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  default_scope -> { order(created_at: :DESC) }
-  scope :friends_posts -> { where() }
+  default_scope -> { order(created_at: :desc) }
+
 
   belongs_to :author, class_name: 'User'
   has_many :comments

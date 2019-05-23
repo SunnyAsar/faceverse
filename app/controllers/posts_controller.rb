@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   def index
-    @posts = current_user.posts
-    current_user.friends.each do |friend|
-      @posts += friend.post
-    end
+
+    ids = current_user.friends.pluck(:id) << current_user.id
+    @posts = Post.where(author_id: ids)
+
   end
 end

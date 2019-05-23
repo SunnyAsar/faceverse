@@ -16,4 +16,5 @@ class Friendship < ApplicationRecord
     puts 'running after destroy callback'
     Friendship.where(user_id: friend_id, friend_id: user_id).first&.destroy
   end
+
 end
