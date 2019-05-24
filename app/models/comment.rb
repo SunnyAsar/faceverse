@@ -1,7 +1,12 @@
 class Comment < ApplicationRecord
+
   belongs_to :post
   belongs_to :commenter, class_name: "User"
+  has_many :likes, as: :likeable, dependent: :destroy
 
-  has_many :likes, as: :likeable
+
+  validates :content, presence: true
+  validates :commenter, presence: true
+
   
 end
