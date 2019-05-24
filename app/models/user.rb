@@ -1,10 +1,13 @@
 # frozen_string_literal: true
-
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+         validates :first_name, presence: true
+         validates :last_name, presence: true
+         
 
   has_many :posts, foreign_key: :author_id, dependent: :destroy
   has_many :comments, foreign_key: :commenter_id
@@ -29,4 +32,15 @@ class User < ApplicationRecord
   def friends
     direct_friends + inverse_friends
   end
+
+  def send_friend_request(user_id)
+    self.sent_requests.create(receiver_id: user_id)
+  end
+
+  def friend_requests
+    self.friends_requesting
+  end
+
+
+
 end

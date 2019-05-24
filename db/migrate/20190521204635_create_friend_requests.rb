@@ -8,7 +8,7 @@ class CreateFriendRequests < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :friend_requests, %i[sender_id receiver_id]
+    add_index :friend_requests, %i[sender_id receiver_id], unique: true
     add_foreign_key :friend_requests, :users, column: :sender_id
     add_foreign_key :friend_requests, :users, column: :receiver_id
   end
