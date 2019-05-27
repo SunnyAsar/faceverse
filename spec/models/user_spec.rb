@@ -18,8 +18,13 @@ RSpec.describe User, type: :model do
   end
 
   context 'testing Associations' do
-    it { should have_many(:posts)}
-    it { should have_many(:comments) }
+    it { should have_many(:posts).dependent(:destroy)}
+    it { should have_many(:comments).dependent(:destroy) }
+  end
+
+  context 'many to many' do
+    it { should have_many(:friends_requested).through(:sent_requests) }
+    it { should have_many(:friends_requesting).through(:received_requests)}
   end
   
 end

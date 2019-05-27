@@ -8,22 +8,22 @@ RSpec.describe Post, type: :model do
     expect(post).to eq(true)
   end
 
-  it 'expects author to be invalid' do 
+  it 'expects author to be invalid' do
     post = Post.new(content: "the test post").save
     expect(post).to eq(false)
   end
 
-  it 'expects content to be invalid' do 
+  it 'expects content to be invalid' do
     post = Post.new(author_id:user.id).save
     expect(post).not_to eq(true)
   end
 
-  it 'ecpects post to be stored' do 
+  it 'expects post to be stored' do 
     post = Post.new(content: "the test post", author_id: user.id).save
     expect(Post.count).to eq(1)
   end
 
-  context 'validate associations' do 
+  context 'validate associations' do
     it { should belong_to(:author) }
     it { should have_many(:comments) }
   end
