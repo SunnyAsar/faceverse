@@ -1,4 +1,4 @@
-if Rails.env.development? || Rails.evn.test? 
+if Rails.env.development? || Rails.env.test? 
   require 'factory_bot'
 
   namespace :dev do

@@ -50,14 +50,14 @@ group :development, :test do
 
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'pry-rails'
-  gem 'hirb'
+
+  # gem 'shoulda', '~> 3.6'
+  # gem 'database_cleaner', '~> 1.7'
+
+  # gem 'pry-rails'
+  # gem 'hirb'
 
 end
-
-
-
-
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -74,6 +74,9 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+
+  gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
