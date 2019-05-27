@@ -36,13 +36,10 @@ class User < ApplicationRecord
   end
 
   def send_friend_request(user_id)
-    self.sent_requests.create(receiver_id: user_id)
+    sent_requests.create(receiver_id: user_id)
   end
 
   def friend_requests
-    self.friends_requesting
+    friends_requesting
   end
-
-
-
 end
