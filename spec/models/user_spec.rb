@@ -23,7 +23,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'public instance methods' do
-    # Todo:
     let(:user) { create(:user) }
     context 'respond to its methods' do
       it { expect(user).to respond_to(:friends) }
