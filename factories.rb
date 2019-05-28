@@ -1,4 +1,4 @@
-require  'faker'
+require 'faker'
 
 FactoryBot.define do
   factory :user do
@@ -10,13 +10,16 @@ FactoryBot.define do
   end
 
   factory :post do
-    content { Faker::ChuckNorris.fact}
+    content { Faker::ChuckNorris.fact }
     association :author, factory: :user
+  end
+
+  factory :invalid_post, class: :post do
+    content { '' }
   end
 
   factory :friendship do
     association :user, factory: :user
     association :friend, factory: :user
   end
-
 end
