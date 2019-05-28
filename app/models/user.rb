@@ -12,7 +12,6 @@ class User < ApplicationRecord
 
   has_many :comments, foreign_key: :commenter_id, dependent: :destroy
 
-
   has_many :sent_requests, class_name: 'FriendRequest', foreign_key: :sender_id, dependent: :destroy
   has_many :friends_requested, through: :sent_requests, source: :receiver
 
@@ -26,7 +25,6 @@ class User < ApplicationRecord
   has_many :inverse_friends, through: :inverse_friendships, source: :user
 
   has_many :likes, foreign_key: :liker_id, dependent: :destroy
-
 
   has_many :liked_posts, through: :likes, source: :likeable, source_type: 'Post'
   has_many :liked_comments, through: :likes, source: :likeable, source_type: 'Comment'

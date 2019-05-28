@@ -2,16 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  # let (:user) { User.new(first_name:'j',email:'p@m.com',password:'foobar',password_confirmation:'foobar').save}
-  # it 'validates first name' do 
-  #   expect(user).not_to eq(true)
-  # end
-
-  it 'validates last name' do 
-    user = User.new(last_name:'q',email:'p@m.com',password:'foobar',password_confirmation:'foobar').save
-    expect(user).not_to eq(true)
-  end
-
   context 'field validations' do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
@@ -22,9 +12,22 @@ RSpec.describe User, type: :model do
     it { should have_many(:comments).dependent(:destroy) }
   end
 
-  context 'many to many' do
+  context 'friend_requests' do
     it { should have_many(:friends_requested).through(:sent_requests) }
     it { should have_many(:friends_requesting).through(:received_requests)}
   end
-  
+
+  context 'friendship' do
+    it { should have_many(:direct_friends).through(:direct_friendships) }
+    it { should have_many(:inverse_friends).through(:inverse_friendships)}
+  end
+
+  describe 'public instance methods' do
+    let(:user) { create(:user) }
+    context 'respond to its methods' do
+      it { expect(user).to respond_to(:friends) }
+      it { expect(user).to respond_to(:send_friend_request) }
+      it { expect(user).to respond_to(:friend_requests) }
+    end
+  end
 end
