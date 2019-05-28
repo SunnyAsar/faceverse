@@ -76,6 +76,7 @@ group :test do
   gem 'chromedriver-helper'
 
   gem 'shoulda-matchers'
+  gem 'shoulda-callback-matchers'
   gem 'rails-controller-testing'
 end
 

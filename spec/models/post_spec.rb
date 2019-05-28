@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-
   it 'with content and author is valid' do
     post = build(:post)
     expect(post).to be_valid
@@ -9,7 +8,7 @@ RSpec.describe Post, type: :model do
 
   it 'without content is invalid' do
     post = build(:invalid_post)
-    expect(post).not_to eq(true)
+    expect(post).to_not be_valid
   end
 
   context 'validate associations' do
@@ -17,4 +16,6 @@ RSpec.describe Post, type: :model do
     it { should have_many(:comments).dependent(:destroy) }
     it { should have_many(:likes).dependent(:destroy)}
   end
+
+  describe 'des'
 end

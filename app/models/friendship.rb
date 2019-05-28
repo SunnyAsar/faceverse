@@ -1,6 +1,4 @@
 class Friendship < ApplicationRecord
-  # after_create_commit :create_inverse_frienship
-  # after_destroy_commit :destroy_inverse_frienship
   before_create :order_params
 
   belongs_to :user
