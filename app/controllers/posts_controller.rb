@@ -1,5 +1,10 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
+  before_action :require_permission, only: %i[edit update destroy]
+
   def index
+    @post = Post.new
     @posts = Post.feed_for(current_user)
   end
 
@@ -7,27 +12,33 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = 'Post created'
+      redirect_to root_url
     else
-      flash[:alert] = 'Unable to create post, try to add content before post'
+      @posts = Post.feed_for(current_user)
+      render 'index'
     end
-    redirect_to root_url
   end
 
   def destroy
-    post = Post.find(params[:id])
-    res = post.destroy if post.author == current_user
-    if res
+    if @post.destroy
       flash[:success] = 'Deleted successfully !'
-      redirect_to root_url
     else
-      flash.now[:alert] = " sorry Not deleted..."
-      redirect_to root_url
+      flash[:alert] = 'sorry Not deleted...'
     end
+    redirect_to root_url
   end
 
   private
 
   def post_params
     params.require(:post).permit(:content)
+  end
+
+  def require_permission
+    @post = Post.find(params[:id])
+    return if @post.author == current_user
+
+    flash[:alert] = 'You have no permission'
+    redirect_to root_url
   end
 end
