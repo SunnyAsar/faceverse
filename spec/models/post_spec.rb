@@ -1,9 +1,6 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let(:user) { create(:user) }
 
   it 'with content and author is valid' do
     post = build(:post)
@@ -17,6 +14,7 @@ RSpec.describe Post, type: :model do
 
   context 'validate associations' do
     it { should belong_to(:author) }
-    it { should have_many(:comments) }
+    it { should have_many(:comments).dependent(:destroy) }
+    it { should have_many(:likes).dependent(:destroy)}
   end
 end
