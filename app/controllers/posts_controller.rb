@@ -13,7 +13,17 @@ class PostsController < ApplicationController
     redirect_to root_url
   end
 
-  def destroy; end
+  def destroy
+    post = Post.find(params[:id])
+    res = post.destroy if post.author == current_user
+    if res
+      flash[:success] = 'Deleted successfully !'
+      redirect_to root_url
+    else
+      flash.now[:alert] = " sorry Not deleted..."
+      redirect_to root_url
+    end
+  end
 
   private
 
