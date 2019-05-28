@@ -12,9 +12,23 @@ RSpec.describe User, type: :model do
     it { should have_many(:comments).dependent(:destroy) }
   end
 
-  context 'friendship and friend_requests' do
+  context 'friend_requests' do
     it { should have_many(:friends_requested).through(:sent_requests) }
     it { should have_many(:friends_requesting).through(:received_requests)}
   end
-  
+
+  context 'friendship' do
+    it { should have_many(:direct_friends).through(:direct_friendships) }
+    it { should have_many(:inverse_friends).through(:inverse_friendships)}
+  end
+
+  describe 'public instance methods' do
+    # Todo:
+    let(:user) { create(:user) }
+    context 'respond to its methods' do
+      it { expect(user).to respond_to(:friends) }
+      it { expect(user).to respond_to(:send_friend_request) }
+      it { expect(user).to respond_to(:friend_requests) }
+    end
+  end
 end
