@@ -41,8 +41,20 @@ class User < ApplicationRecord
     friends_requested.pluck(:id).include?(user_id)
   end
 
+  def friend_requesting?(user_id)
+    friends_requesting.pluck(:id).include?(user_id)
+  end
+
   def send_friend_request(user_id)
     sent_requests.create(receiver_id: user_id)
+  end
+
+  def delete_friend_request(user_id)
+    revceived_requests.where(sender_id: user_id).destroy
+  end
+
+  def add_friend(user_id)
+    direct_friendships.create(friend_id: user_id)
   end
 
   def friend_requests
@@ -52,6 +64,4 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
-
-
 end

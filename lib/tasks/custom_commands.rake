@@ -16,6 +16,8 @@ if Rails.env.development? || Rails.env.test?
       end
       2.times { create(:post, author: u) }
       u.direct_friends += User.all.sample(5).reject { |user_i| user_i.id == u.id }
+      other_users = User.where.not(id: (u.friends.map(&:id) << u.id)).sample(3)
+      u.friends_requesting += other_users
     end
   end
 end
