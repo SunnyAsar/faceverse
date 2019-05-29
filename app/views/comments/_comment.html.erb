@@ -1,18 +1,7 @@
-<h3> Commnets </h3>
-
-<%= form_for(@comment) do |f| %>
-  <%= render 'shared/errors', object: f.object %>
-  
-  <div class='form-group '>
-  <%= f.hidden_field :post_id, value: @post.id %>
-  <%= f.label :content, 'make your comment here' %>
-  <%= f.text_area :content, class:'form-control' %>
-  </div>
-  <%= f.submit 'Comment.', class: 'btn btn-primary btn-lg pull-right' %>
-<% end %>
-
-<ul>
-  <% @post.comments.each do |comment| %>
-    <li> <%= comment.content %> </li>
+<li>
+  <b><%= comment.commenter.full_name %>:</b> <%= comment.content %>
+  <% if owner?(comment.commenter) %>
+  | <%= link_to 'Edit', edit_comment_path(comment) %>
+  | <%= link_to('Destory', comment, data: {confirm:'Are you sure?'},  method: :delete) %>
   <% end %>
-</ul>
+</li>

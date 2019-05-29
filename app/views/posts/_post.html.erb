@@ -1,4 +1,7 @@
 <li>
-  <%= post.content %> | By <%= post.author.email %>
-  | <%= link_to('destory', post ,data: {confirm:'Are you sure?'},  method: :delete) if owner?(post.author)%>
+  <%= link_to post.content, post %> | By <%= post.author.email %>
+  <% if owner?(post.author) %>
+  | <%= link_to 'Edit', edit_post_path(post) %>
+  | <%= link_to('Destory', post, data: {confirm:'Are you sure?'},  method: :delete) %>
+  <% end %>
 </li>

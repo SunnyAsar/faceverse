@@ -40,4 +40,8 @@ class User < ApplicationRecord
   def friend_requests
     friends_requesting
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

@@ -1,9 +1,19 @@
 <div class="page-header">
   <div class="row">
-   <p>
-   <%= @post.content %>
-   </p>
+    <h3><%= @post.author.full_name.upcase %></h3>
+    <h4>
+      <%= @post.content %>
+    </h4>
+    <% if owner?(@post.author) %>
+    <p>
+      <%= link_to 'Edit', edit_post_path(@post) %>
+      | <%= link_to('Destory', @post, data: {confirm:'Are you sure?'},  method: :delete) %>
+    </p>
+  <% end %>
   </div>
 </div>
-<%=render 'comments/comment'  %>
-
+<h3> Commnets </h3>
+<%= render 'comments/form' %>
+<ul>
+  <%=render @post.comments %>
+</ul>
