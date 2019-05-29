@@ -50,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def delete_friend_request(user_id)
-    revceived_requests.where(sender_id: user_id).destroy
+    received_requests.where(sender_id: user_id).first.destroy
   end
 
   def add_friend(user_id)

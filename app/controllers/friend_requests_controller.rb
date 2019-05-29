@@ -1,4 +1,4 @@
-require 'byebug'
+# require 'byebug'
 
 class FriendRequestsController < ApplicationController
   before_action :set_receiver_id, only: :create
@@ -34,7 +34,7 @@ class FriendRequestsController < ApplicationController
   end
 
   def validate_inverse_request
-    debugger
+    # debugger
     return unless current_user.friend_requesting?(@receiver_id)
 
     current_user.add_friend(@receiver_id)

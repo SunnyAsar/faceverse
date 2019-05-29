@@ -1,5 +1,5 @@
 <li>
-  <%= link_to truncate post.content, length: 150 %> | By <%= post.author.email %>
+  <%= link_to truncate(post.content, length: 150), post %> | By <%= post.author.email %>
   <% if owner?(post.author) %>
   | <%= link_to 'Edit', edit_post_path(post) %>
   | <%= link_to('Destory', post, data: {confirm:'Are you sure?'},  method: :delete) %>
