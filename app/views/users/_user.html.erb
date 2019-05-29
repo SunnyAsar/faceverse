@@ -1,23 +1,17 @@
-
-  <li>
+<li>
   <div class="friend-row">
     <div class="name">
-    <%= user.full_name %> 
+      <%= user.full_name %>
+    </div>
+
+    <% unless current_user.friend?(user.id) || current_user.friend_requested?(user.id)  %>
+      <%= form_for(:friend_request, url: friend_requests_path) do |f| %>
+        <%= f.hidden_field :receiver_id, value: user.id %>
+        <%= f.submit "Add Friend", class: "btn btn-primary btn-xs" %>
+      <% end %>
+    <% end %>
+    <% if current_user.friend_requested?(user.id) %>
+      <span class="btn btn-xs disabled">Firend request sent</span>
+    <% end %>
   </div>
-
-  
-  <% unless current_user.friend?(user.id)  %>
-    <%= form_for(:friend_request) do |f| %>
-    <%= f.hidden_field :receiver_id, value: user.id %>
-    <%= f.submit "Add Friend", class: "btn btn-primary btn-xs"  %>
-
-  <% end %>
-
-  <% end %>
-  
-  
-
-  </div>
-  </li>
-
-
+</li>

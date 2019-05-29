@@ -9,12 +9,13 @@ if Rails.env.development? || Rails.env.test?
       include FactoryBot::Syntax::Methods
       u = create(:user, email: 's@me.com')
       create(:post, author: u)
-      5.times do
+      10.times do
         create(:user) do |user|
           2.times { user.posts.create(attributes_for(:post)) }
-          user.direct_friends += User.all.reject { |user_i| user_i.id == user.id }
         end
       end
+      2.times { create(:post, author: u) }
+      u.direct_friends += User.all.sample(5).reject { |user_i| user_i.id == u.id }
     end
   end
 end

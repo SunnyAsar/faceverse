@@ -34,7 +34,11 @@ class User < ApplicationRecord
   end
 
   def friend?(user_id)
-    friends.pluck(id).include?(user_id)
+    friends.map(&:id).include?(user_id)
+  end
+
+  def friend_requested?(user_id)
+    friends_requested.pluck(:id).include?(user_id)
   end
 
   def send_friend_request(user_id)
