@@ -33,6 +33,10 @@ class User < ApplicationRecord
     direct_friends + inverse_friends
   end
 
+  def friend?(user_id)
+    friends.pluck(id).include?(user_id)
+  end
+
   def send_friend_request(user_id)
     sent_requests.create(receiver_id: user_id)
   end
@@ -44,4 +48,6 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+
 end

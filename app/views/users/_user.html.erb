@@ -1,0 +1,23 @@
+
+  <li>
+  <div class="friend-row">
+    <div class="name">
+    <%= user.full_name %> 
+  </div>
+
+  
+  <% unless current_user.friend?(user.id)  %>
+    <%= form_for(:friend_request) do |f| %>
+    <%= f.hidden_field :receiver_id, value: user.id %>
+    <%= f.submit "Add Friend", class: "btn btn-primary btn-xs"  %>
+
+  <% end %>
+
+  <% end %>
+  
+  
+
+  </div>
+  </li>
+
+

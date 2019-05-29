@@ -15,4 +15,9 @@ class Friendship < ApplicationRecord
   def not_self_friendship
     errors.add(:user_id, "can't create relationship with itself") if user_id == friend_id
   end
+
+  # def existing_friendship?()
+
+  # end
+
 end

@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+
+ .friend-row{
+   display: flex;
+   margin: 5px;
+   .name{
+     margin-right: 50px; 
+   }
+ }
