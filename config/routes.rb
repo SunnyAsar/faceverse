@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :posts
   resources :comments
-  resources :friend_requests, only: %i[create destroy]
+  resources :friend_requests, only: %i[index create destroy]
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -1,6 +1,12 @@
 class FriendRequestsController < ApplicationController
   before_action :validate_creation, only: :create
 
+
+  def index
+    @requests = current_user.friend_requests
+  end
+
+
   def create
     @friend_request = current_user.sent_requests.build(friend_request_params)
     if @friend_request.save
