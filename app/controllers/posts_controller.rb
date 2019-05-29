@@ -19,6 +19,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @comment = Comment.new
+    @post = Post.find(params[:id])
+  end
+
   def destroy
     if @post.destroy
       flash[:success] = 'Deleted successfully !'
