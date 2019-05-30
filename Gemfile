@@ -11,6 +11,7 @@ gem 'bootstrap-generators'
 gem 'devise-bootstrap-views'
 gem 'record_tag_helper'
 gem 'table_print'
+gem 'will_paginate', '~> 3.1.0'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'

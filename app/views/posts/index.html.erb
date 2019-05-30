@@ -5,6 +5,7 @@
     <%= render 'form' %>
   </div>
   <div class="row">
+  <%= will_paginate @posts %>
     <ul>
       <%= render(@posts) || 'No posts available' %>
     </ul>
