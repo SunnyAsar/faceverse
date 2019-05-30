@@ -68,10 +68,16 @@ class User < ApplicationRecord
   def likes_post?(post_id)
     liked_posts.pluck(:id).include?(post_id)
   end
-  
+
   def likes_comment?(comment_id)
     liked_comments.pluck(:id).include?(comment_id)
   end
 
+  def post_like(post_id)
+    likes.for(post_id, 'Post')
+  end
 
+  def comment_like(comment_id)
+    likes.for(comment_id, 'Comment')
+  end
 end

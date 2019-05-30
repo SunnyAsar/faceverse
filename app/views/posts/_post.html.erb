@@ -1,48 +1,34 @@
 <li class="comment-or-post">
-  <%= link_to post, class: "content" do %>
-    <div>
-      <b><%= post.author.full_name %>:</b>
-    </div>
-    <div>
-      <%= truncate(post.content, length: 150) %>
-    </div>
-  
-  <% end %>
-<div class="text-muted stats">
-
-      
-
-  <% if current_user.likes_post?(post.id)  %>
-     <span> 
-      <%= form_for(:like, url: like_path(post.id), method: :delete) do |f|  %>
-        <%= f.hidden_field :likeable_id, value: post.id %>
-        <%= f.hidden_field :likeable_type, value: "Post" %>
-        <%= f.submit 'Unlike', class: "btn btn-warning btn-xs" %>
-      <% end %>
-
-      
-      </span>
-
-      <% else  %>
-        <span> 
-      <%= form_for(@like) do |f| %>
-        <%= f.hidden_field :likeable_id, value: post.id %>
-        <%= f.hidden_field :likeable_type, value: "Post" %>
-        <%= f.submit 'Like', class: "btn btn-primary btn-xs" %>
-      <% end %>
-      </span>
-
+  <div>
+    <%= link_to post, class: "content" do %>
+      <div>
+        <b><%= post.author.full_name %>:</b>
+      </div>
+      <div>
+        <%= truncate(post.content, length: 150) %>
+      </div>
     <% end %>
-
-
- <span> <%= pluralize(post.likes.count, 'Like' )%></span>
+    <div class="text-muted stats">
+      <% if current_user.likes_post?(post.id)  %>
+        <span>
+          <%= link_to 'Unlike', current_user.post_like(post.id), class: 'btn btn-warning btn-xs', method: :delete %>
+        </span>
+      <% else  %>
+        <span>
+          <%= form_for(:like, url: likes_path) do |f| %>
+            <%= f.hidden_field :likeable_id, value: post.id %>
+            <%= f.hidden_field :likeable_type, value: "Post" %>
+            <%= f.submit 'Like', class: "btn btn-primary btn-xs" %>
+          <% end %>
+        </span>
+      <% end %>
+      <span> <%= pluralize(post.likes.count, 'Like' )%></span>
       <span> <%= pluralize(post.comments.count, 'Comment' )%></span>
     </div>
-
+  </div>
   <div class="owner-options">
     <% if owner?(post.author) %>
       <%= render partial: 'shared/actions', locals: { object: post, object_link: edit_post_path(post) } %>
     <% end %>
   </div>
-
 </li>
