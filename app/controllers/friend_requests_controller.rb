@@ -1,7 +1,7 @@
 # require 'byebug'
 
 class FriendRequestsController < ApplicationController
-  before_action :set_receiver_id, only: :create
+  before_action :set_receiver_id, except: :index
   before_action :validate_creation, only: :create
   before_action :validate_inverse_request, only: :create
 
@@ -14,7 +14,10 @@ class FriendRequestsController < ApplicationController
     redirect_to users_path
   end
 
-  def destroy; end
+  def destroy
+    current_user.delete_friend_request(@receiver_id)
+     redirect_to friend_requests_path  
+  end
 
   private
 

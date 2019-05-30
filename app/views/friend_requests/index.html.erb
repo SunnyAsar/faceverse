@@ -1,6 +1,7 @@
 <div class="page-header">
 <div class= "row">
-  <ul> <%= render @requests %> </ul>
+  <ul> <%= render partial:'users/request', collection: @requests, as: :user %> </ul>
+  
 </div>
 </div>
 
