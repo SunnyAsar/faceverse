@@ -16,10 +16,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-        
+
         <li>
         <%= link_to( friend_requests_path) do %>
-        <button class="btn btn-info" type="button"> <%= 'Request'.pluralize(current_user.friend_requests.count)  %> <span class="badge"> <%= current_user.friend_requests.count %> </span></button>
+        <button class="btn btn-info btn-xs" type="button"> <%= 'Request'.pluralize(current_user.friend_requests.count)  %> <span class="badge"> <%= current_user.friend_requests.count %> </span></button>
         <% end %>
         </li>
 

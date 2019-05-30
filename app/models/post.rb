@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  self.per_page = 2
   # scope :pagination, ->{ paginate(page: params[:page], per_page: 3 }
 
   validates :content, presence: true

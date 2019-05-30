@@ -1,4 +1,3 @@
-require 'byebug'
 class LikesController < ApplicationController
   def create
     current_user.likes.create(like_params)

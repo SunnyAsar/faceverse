@@ -12,12 +12,14 @@
   </div>
 </div>
 <h3> Commnets </h3>
+<%= will_paginate @comments, renderer: BootstrapPagination::Rails%>
 <div class="row">
   <%= render 'comments/form' %>
 </div>
+<%= will_paginate @comments, renderer: BootstrapPagination::Rails%>
 <div class="row">
 
   <ul>
-    <%=render @post.comments.paginate(page: params[:page], per_page: 3) %>
+    <%=render @comments %>
   </ul>
 </div>

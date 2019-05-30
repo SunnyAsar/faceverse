@@ -5,10 +5,11 @@
     <%= render 'form' %>
   </div>
   <div class="row">
-  <%= will_paginate @posts %>
+  <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
     <ul>
       <%= render(@posts) || 'No posts available' %>
     </ul>
+  <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
   </div>
 </div>
 <p>Find me in app/views/posts/index.html.erb</p>

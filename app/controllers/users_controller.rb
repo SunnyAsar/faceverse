@@ -2,6 +2,6 @@
 
 class UsersController < ApplicationController
   def index
-    @users = User.all.reject { |user| user == current_user }
+    @users = User.where.not(id: current_user.id).paginate(page: params[:page])
   end
 end

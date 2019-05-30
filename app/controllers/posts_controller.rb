@@ -23,6 +23,7 @@ class PostsController < ApplicationController
   def show
     @comment = Comment.new
     @post = Post.find(params[:id])
+    @comments = @post.comments.paginate(page: params[:page])
   end
 
   def edit; end
