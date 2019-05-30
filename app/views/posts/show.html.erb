@@ -16,7 +16,8 @@
   <%= render 'comments/form' %>
 </div>
 <div class="row">
+
   <ul>
-    <%=render @post.comments %>
+    <%=render @post.comments.paginate(page: params[:page], per_page: 3) %>
   </ul>
 </div>

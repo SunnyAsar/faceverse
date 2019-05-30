@@ -14,13 +14,11 @@
 
   <% if current_user.likes_post?(post.id)  %>
      <span> 
-      <%= form_for(:like, url: like_path(post.id), method: :delete) do |f|  %>
-        <%= f.hidden_field :likeable_id, value: post.id %>
+      <%= form_for(@like, url: like_path(post.id), method: :delete) do |f|  %>
         <%= f.hidden_field :likeable_type, value: "Post" %>
         <%= f.submit 'Unlike', class: "btn btn-warning btn-xs" %>
       <% end %>
 
-      
       </span>
 
       <% else  %>

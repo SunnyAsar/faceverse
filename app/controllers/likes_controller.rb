@@ -13,8 +13,8 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = Like.where(likeable_id: like_params[:id]).where(likeable_type: like_params[:likeable_type]).first
-    debugger
+    @like = Like.where(likeable_id: params[:id]).where(likeable_type: like_params[:likeable_type]).first
+    # debugger
     @like.destroy
     redirect_back_or(root_url)
   end
