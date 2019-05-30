@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
+    @like = Like.new
     @posts = Post.feed_for(current_user)
   end
 

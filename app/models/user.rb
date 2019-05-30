@@ -64,4 +64,14 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def likes_post?(post_id)
+    liked_posts.pluck(:id).include?(post_id)
+  end
+  
+  def likes_comment?(comment_id)
+    liked_comments.pluck(:id).include?(comment_id)
+  end
+
+
 end

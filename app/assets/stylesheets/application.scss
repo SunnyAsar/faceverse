@@ -39,8 +39,19 @@
   &:last-child {
     border-bottom: none;
   }
+  .stats{
+    color: teal;
+    display: flex;
+    *{
+      &:first-child {
+        padding-right: 2px;
+      }
+      padding-right: 10px;
+    }
+  }
 }
 
 .pt {
   padding-top: 10px;
 }
+
