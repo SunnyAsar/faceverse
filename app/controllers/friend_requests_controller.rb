@@ -11,12 +11,12 @@ class FriendRequestsController < ApplicationController
 
   def create
     @friend_request = current_user.send_friend_request(@receiver_id)
-    redirect_to users_path
+    redirect_back_or users_path
   end
 
   def destroy
     current_user.delete_friend_request(@receiver_id)
-     redirect_to friend_requests_path  
+    redirect_back_or friend_requests_path
   end
 
   private
@@ -33,7 +33,7 @@ class FriendRequestsController < ApplicationController
     return unless current_user.friend?(@receiver_id) || current_user.friend_requested?(@receiver_id)
 
     flash[:alert] = 'This user is already your friend or the friend request have been done before'
-    redirect_to users_path
+    redirect_back_or users_path
   end
 
   def validate_inverse_request
@@ -42,6 +42,6 @@ class FriendRequestsController < ApplicationController
 
     current_user.add_friend(@receiver_id)
     current_user.delete_friend_request(@receiver_id)
-    redirect_to users_path
+    redirect_back_or friend_requests_path
   end
 end

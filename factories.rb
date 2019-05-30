@@ -19,7 +19,7 @@ FactoryBot.define do
   end
 
   factory :comment do
-    content { Faker::Lorem.sentences(1) }
+    content { Faker::Hacker.say_something_smart }
     commenter
     post
 

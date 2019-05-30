@@ -15,10 +15,32 @@
  */
 
 
- .friend-row{
-   display: flex;
-   margin: 5px;
-   .name{
-     margin-right: 50px; 
-   }
- }
+.friend-row{
+  display: flex;
+  margin: 5px;
+  .name{
+    margin-right: 50px;
+  }
+  form {
+    margin-right: 10px;
+  }
+}
+
+.comment-or-post {
+  .content {
+    text-decoration: none;
+    color: black;
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.pt {
+  padding-top: 10px;
+}

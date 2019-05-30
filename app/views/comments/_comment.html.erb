@@ -1,7 +1,10 @@
-<li>
-  <b><%= comment.commenter.full_name %>:</b> <%= comment.content %>
-  <% if owner?(comment.commenter) %>
-  | <%= link_to 'Edit', edit_comment_path(comment) %>
-  | <%= link_to('Destory', comment, data: {confirm:'Are you sure?'},  method: :delete) %>
-  <% end %>
+<li class="comment-or-post">
+  <div class="content">
+    <b><%= comment.commenter.full_name %>:</b> <%= comment.content %>
+  </div>
+  <div class="actions">
+    <% if owner?(comment.commenter) %>
+      <%= render partial: 'shared/actions', locals: { object: comment, object_link: edit_comment_path(comment) } %>
+    <% end %>
+  </div>
 </li>

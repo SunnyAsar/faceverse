@@ -18,6 +18,13 @@ if Rails.env.development? || Rails.env.test?
       u.direct_friends += User.all.sample(5).reject { |user_i| user_i.id == u.id }
       other_users = User.where.not(id: (u.friends.map(&:id) << u.id)).sample(3)
       u.friends_requesting += other_users
+
+      all_users = User.all
+      Post.all.each do |post|
+        rand(4..7).times do
+          create(:comment, post: post, commenter: all_users.sample(1).first)
+        end
+      end
     end
   end
 end

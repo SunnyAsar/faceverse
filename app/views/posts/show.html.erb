@@ -6,14 +6,17 @@
     </h4>
     <% if owner?(@post.author) %>
     <p>
-      <%= link_to 'Edit', edit_post_path(@post) %>
-      | <%= link_to('Destory', @post, data: {confirm:'Are you sure?'},  method: :delete) %>
+      <%= render partial: 'shared/actions', locals: { object: @post, object_link: edit_post_path(@post) } %>
     </p>
   <% end %>
   </div>
 </div>
 <h3> Commnets </h3>
-<%= render 'comments/form' %>
-<ul>
-  <%=render @post.comments %>
-</ul>
+<div class="row">
+  <%= render 'comments/form' %>
+</div>
+<div class="row">
+  <ul>
+    <%=render @post.comments %>
+  </ul>
+</div>
