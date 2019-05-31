@@ -1,0 +1,29 @@
+<div class="row">
+
+
+  <div class="col-md-3">
+  <a href="#" class="thumbnail">
+      <img src="..." alt="...">
+    </a>
+
+    <h3> <%= @user.full_name %> </h3>
+    <%= @user.profile.country || 'No Country Yet' %>
+    
+
+  </div>
+
+  <div class="col-md-6">
+   
+   <h3> <%= pluralize(@user.posts.count, 'post')  %> </h3>
+
+  <%= render @user.posts.take(5) %>
+   
+  </div>
+
+
+<div class="col-md-3">
+    <%= render @user.friends.take(5) %>
+  </div>
+
+  
+</div>

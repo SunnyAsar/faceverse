@@ -8,6 +8,10 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook]
 
   validates :first_name, presence: true
+  after_create :create_profile
+
+
+  has_one :profile, dependent: :destroy
 
   has_many :posts, foreign_key: :author_id, dependent: :destroy
 
@@ -98,4 +102,11 @@ class User < ApplicationRecord
       user.first_name = auth.info.name
     end
   end
+
+  private
+  def create_profile
+    Profile.create(user: self)
+    puts 'creating profile .....'
+  end
+
 end
