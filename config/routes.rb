@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'comments/create'
   get 'comments/destroy'
   root 'posts#index'
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :posts
   resources :comments
   resources :friend_requests, only: %i[index create destroy]
