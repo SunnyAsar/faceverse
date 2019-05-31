@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = 'Post created'
-      redirect_to root_url
+      redirect_back fallback_location: root_path
     else
       @posts = Post.feed_for(current_user)
       render 'index'
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
     else
       flash[:alert] = 'sorry Not deleted...'
     end
-    redirect_to root_url
+    redirect_back fallback_location: root_path
   end
 
   private
@@ -57,6 +57,6 @@ class PostsController < ApplicationController
     return if @post.author == current_user
 
     flash[:alert] = 'You have no permission'
-    redirect_to root_url
+    redirect_back fallback_location: root_path
   end
 end
