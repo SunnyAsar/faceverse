@@ -1,14 +1,12 @@
 require 'byebug'
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
-    # You need to implement the method below in your model (e.g. app/models/user.rb)
-    platform = request.env["omniauth.auth"]
-    @user = User.from_omniauth(platform)
+    @user = User.from_omniauth(request.env["omniauth.auth"])
 
-      # debugger
     if @user.persisted?
-      sign_in @user #this will throw if @user is not activated
-      set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
+      sign_in @user
+      set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
+      redirect_to root_url
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url

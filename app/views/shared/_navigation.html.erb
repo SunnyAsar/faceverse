@@ -27,8 +27,8 @@
         <% else %>
           <li><%= link_to 'Sign up', new_user_registration_path %></li>
           <li><%= link_to 'Sign in', new_user_session_path %></li>
-          <li><%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %></li>
-          
+          <li><%= link_to user_facebook_omniauth_authorize_path, class: "bg-primary text-white" do %><i class="fa fa-facebook-f fa-lg"></i> Sign in <% end %></li>
+
         <% end %>
       </ul>
     </div>
