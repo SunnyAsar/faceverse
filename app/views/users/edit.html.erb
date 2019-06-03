@@ -1,0 +1,41 @@
+<h3> Edit profile </h3>
+
+<div class="row">
+  <div class="col-xs-12 col-md-4 col-md-offset-4">
+    <%= form_for(@user, url: user_path) do |f| %>
+
+      <div class="form-group">
+        <%= f.label :first_name, 'First Name' %>
+        <%= f.text_field :first_name, autocomplete: 'first-name', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name, 'Last Name' %>
+        <%= f.text_field :last_name, autocomplete: 'last-name', class: 'form-control' %>
+      </div>
+      
+        <%= f.fields_for :profile do |p| %>
+      <div class="form-group">
+        <%= p.label :age %>
+        <%= p.text_field :age, autocomplete: 'current-password', class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= p.label :country %>
+        <%= p.text_field :country, autocomplete: 'current-password', class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= p.label :profile_picture %>
+        <%= p.file_field :profile_picture, autocomplete: 'current-password', class: 'form-control' %>
+      </div>
+      <% end  %>
+
+       
+
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

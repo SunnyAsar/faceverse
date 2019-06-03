@@ -3,25 +3,26 @@
 
   <div class="col-md-3">
   <a href="#" class="thumbnail">
-      <img src="..." alt="...">
+      <%= image_tag(@user.profile.profile_picture, draggable: "true", id: "drag1") %>
     </a>
-
     <h3> <%= @user.full_name %> </h3>
-    <%= @user.profile.country || 'No Country Yet' %>
-    
+    <%= @user.profile.age  || 'No Country Yet'%> years,
+    <%= @user.profile.country || 'No Country Yet'%>
+
+    <div class="row">
+    <%= link_to 'Edit Profile', edit_user_path, class: 'btn btn-info' if owner?(@user) %>
+    </div>
 
   </div>
 
   <div class="col-md-6">
-   
    <h3> <%= pluralize(@user.posts.count, 'post')  %> </h3>
-
-  <%= render @user.posts.take(5) %>
-   
+    <%= render @user.posts.take(5) %>
   </div>
 
 
-<div class="col-md-3">
+  <div class="col-md-3">
+  <h4> Friends </h4>
     <%= render @user.friends.take(5) %>
   </div>
 

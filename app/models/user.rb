@@ -9,9 +9,11 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   after_create :create_profile
+ 
 
 
   has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile
 
   has_many :posts, foreign_key: :author_id, dependent: :destroy
 
