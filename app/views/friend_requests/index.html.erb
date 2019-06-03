@@ -1,7 +1,3 @@
 <div class="page-header">
-<div class= "row">
-  <ul> <%= render partial:'users/request', collection: @requests, as: :user %> </ul>
-  
+  <ul class="no-decoration"><%= render @requests, rejectable: true %> </ul>
 </div>
-</div>
-

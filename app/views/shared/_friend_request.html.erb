@@ -3,6 +3,12 @@
     <%= f.hidden_field :receiver_id, value: user.id %>
     <%= f.submit "Add Friend", class: "btn btn-primary" %>
   <% end %>
+  <% if rejectable %>
+    <%= form_for(:friend_request, url: friend_request_path(user), method: :delete, data: {confirm: "Are you sure?"}) do |f| %>
+      <%= f.hidden_field :receiver_id, value: user.id %>
+      <%= f.submit "Reject Request", class: "btn btn-danger ml" %>
+    <% end %>
+  <% end %>
 <% end %>
 <% if current_user.friend_requested?(user.id) %>
   <span class="btn btn-xs disabled">Firend request sent</span>

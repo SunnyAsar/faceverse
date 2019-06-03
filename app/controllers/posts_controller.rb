@@ -22,7 +22,9 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @post = Post.find(params[:id])
+    @post = Post.find_by_id(params[:id])
+    return redirect_to root_url if @post.nil?
+
     @comments = @post.comments.paginate(page: params[:page])
   end
 

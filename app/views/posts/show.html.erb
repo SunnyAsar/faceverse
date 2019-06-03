@@ -1,15 +1,7 @@
-<div class="page-header">
-  <div class="row">
-    <h3><%= @post.author.full_name.upcase %></h3>
-    <h4>
-      <%= @post.content %>
-    </h4>
-    <% if owner?(@post.author) %>
-    <p>
-      <%= render partial: 'shared/actions', locals: { object: @post, object_link: edit_post_path(@post) } %>
-    </p>
-  <% end %>
-  </div>
+<div class="page-header row">
+  <ul class="no-decoration">
+    <%= render @post %>
+  </ul>
 </div>
 <h3> Commnets </h3>
 <%= will_paginate @comments, renderer: BootstrapPagination::Rails%>
