@@ -1,21 +1,29 @@
-<li class="comment-or-post">
+<li class="comment">
   <div class="content">
-    <b><%= comment.commenter.full_name %>:</b> <%= comment.content %>
-    <div class="likes">
-      <% if current_user.likes_comment?(comment.id)  %>
-          <span>
-            <%= link_to 'Unlike', current_user.comment_like(comment.id), class: 'btn btn-warning btn-xs', method: :delete %>
-          </span>
-        <% else  %>
-          <span>
-            <%= form_for(:like, url: likes_path) do |f| %>
-              <%= f.hidden_field :likeable_id, value: comment.id %>
-              <%= f.hidden_field :likeable_type, value: "Comment" %>
-              <%= f.submit 'Like', class: "btn btn-primary btn-xs" %>
+    <div class="media">
+      <div class="media-left">
+        <%= image_tag(image_url_for(comment.commenter), class: "img-rounded") %>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading name"><%= link_to comment.commenter.full_name, comment.commenter %>:</h4>
+        <%= comment.content %>
+        <div class="likes">
+          <% if current_user.likes_comment?(comment.id)  %>
+              <span>
+                <%= link_to 'Unlike', current_user.comment_like(comment.id), class: 'btn btn-warning btn-xs', method: :delete %>
+              </span>
+            <% else  %>
+              <span>
+                <%= form_for(:like, url: likes_path) do |f| %>
+                  <%= f.hidden_field :likeable_id, value: comment.id %>
+                  <%= f.hidden_field :likeable_type, value: "Comment" %>
+                  <%= f.submit 'Like', class: "btn btn-primary btn-xs" %>
+                <% end %>
+              </span>
             <% end %>
-          </span>
-        <% end %>
-        <span class="ml text-muted"> <%= pluralize(comment.likes.count, 'Like' )%></span>
+            <span class="ml text-muted"> <%= pluralize(comment.likes.count, 'Like' )%></span>
+        </div>
+      </div>
     </div>
   </div>
   <div class="actions">

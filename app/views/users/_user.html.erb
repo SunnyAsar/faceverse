@@ -1,17 +1,15 @@
 <li>
   <div class="friend-row">
-    <div class="name">
-      <%= user.full_name %>
-    </div>
-
-    <% unless current_user.friend?(user.id) || current_user.friend_requested?(user.id)  %>
-      <%= form_for(:friend_request, url: friend_requests_path) do |f| %>
-        <%= f.hidden_field :receiver_id, value: user.id %>
-        <%= f.submit "Add Friend", class: "btn btn-primary btn-xs" %>
-      <% end %>
+    <%= link_to user do %>
+      <div class="media">
+        <div class="media-left">
+          <%= image_tag(image_url_for(user), class: "img-rounded") %>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading name"><%= user.full_name %></h4>
+        </div>
+      </div>
     <% end %>
-    <% if current_user.friend_requested?(user.id) %>
-      <span class="btn btn-xs disabled">Firend request sent</span>
-    <% end %>
+    <%= render partial: 'shared/friend_request', locals: {user: user} %>
   </div>
 </li>

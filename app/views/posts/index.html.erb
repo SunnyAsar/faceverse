@@ -3,9 +3,9 @@
   <div class="row">
     <%= render 'form' %>
   </div>
-  <div class="row">
+  <div class="row pt">
   <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
-    <ul>
+    <ul class="no-decoration">
       <%= render(@posts) || 'No posts available' %>
     </ul>
   <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>

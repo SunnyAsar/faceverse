@@ -1,34 +1,36 @@
-<li class="comment-or-post">
-  <div>
-    <%= link_to post, class: "content" do %>
-      <div>
-        <b><%= post.author.full_name %>:</b>
+<li class="post">
+  <div class="panel panel-default">
+    <div class="panel-heading d-flex jc-between">
+      <b><%= post.author.full_name %>:</b>
+      <div class="owner-options">
+        <% if owner?(post.author) %>
+          <%= render partial: 'shared/actions', locals: { object: post, object_link: edit_post_path(post) } %>
+        <% end %>
       </div>
-      <div>
+    </div>
+    <%= link_to post, class: "content w-100" do %>
+      <div class="panel-body">
         <%= truncate(post.content, length: 150) %>
       </div>
     <% end %>
-    <div class="text-muted stats">
-      <% if current_user.likes_post?(post.id)  %>
-        <span>
-          <%= link_to 'Unlike', current_user.post_like(post.id), class: 'btn btn-warning btn-xs', method: :delete %>
-        </span>
-      <% else  %>
-        <span>
-          <%= form_for(:like, url: likes_path) do |f| %>
-            <%= f.hidden_field :likeable_id, value: post.id %>
-            <%= f.hidden_field :likeable_type, value: "Post" %>
-            <%= f.submit 'Like', class: "btn btn-primary btn-xs" %>
-          <% end %>
-        </span>
-      <% end %>
-      <span class="ml"> <%= pluralize(post.likes.count, 'Like' )%></span>
-      <span class="ml"> <%= pluralize(post.comments.count, 'Comment' )%></span>
+    <div class="panel-footer">
+      <div class="text-muted stats d-flex">
+        <% if current_user.likes_post?(post.id)  %>
+          <span>
+            <%= link_to 'Unlike', current_user.post_like(post.id), class: 'btn btn-warning btn-xs', method: :delete %>
+          </span>
+        <% else  %>
+          <span>
+            <%= form_for(:like, url: likes_path) do |f| %>
+              <%= f.hidden_field :likeable_id, value: post.id %>
+              <%= f.hidden_field :likeable_type, value: "Post" %>
+              <%= f.submit 'Like', class: "btn btn-primary btn-xs" %>
+            <% end %>
+          </span>
+        <% end %>
+        <span class="ml"> <%= pluralize(post.likes.count, 'Like' )%></span>
+        <span class="ml"> <%= pluralize(post.comments.count, 'Comment' )%></span>
+      </div>
     </div>
-  </div>
-  <div class="owner-options">
-    <% if owner?(post.author) %>
-      <%= render partial: 'shared/actions', locals: { object: post, object_link: edit_post_path(post) } %>
-    <% end %>
   </div>
 </li>

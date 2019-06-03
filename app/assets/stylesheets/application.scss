@@ -14,10 +14,34 @@
  *= require_self
  */
 
+a {
+  color: black;
+}
+
+.no-decoration {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.no-margin {
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 .friend-row{
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin: 5px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  a {
+    color: black;
+    max-width: 80%;
+  }
   .name{
     margin-right: 50px;
   }
@@ -26,7 +50,23 @@
   }
 }
 
-.comment-or-post {
+.media {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  img {
+    max-width: 64px;
+  }
+}
+
+.post {
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.comment {
   .content {
     text-decoration: none;
     color: black;
@@ -39,6 +79,9 @@
   &:last-child {
     border-bottom: none;
   }
+  .name {
+    font-weight: bold;
+  }
   .stats{
     color: teal;
     display: flex;
@@ -49,6 +92,9 @@
       padding-right: 10px;
     }
   }
+  .owner-options {
+    flex-shrink: 0;
+  }
 }
 
 .pt {
@@ -57,6 +103,28 @@
 
 .ml {
   margin-left: 5px;
+}
+
+.mt {
+  margin-top: 5px;
+}
+
+.m5 {
+  margin: 5px;
+}
+
+.w-100 {
+  width: 100%
+}
+
+.d-flex {
+  display: flex;
+  &.jc-center {
+    justify-content: center;
+  }
+  &.jc-between {
+    justify-content: space-between;
+  }
 }
 
 .text-white {

@@ -15,16 +15,16 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-   end
+  end
 
   def update
     @user = User.find(params[:id])
     @user.update_attributes(update_params)
     if @user
       flash[:success] = "profile Updated!"
-      redirect_back fallback_location: root_path
-    else
       redirect_to @user
+    else
+      render 'edit'
     end
   end
 
