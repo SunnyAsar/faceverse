@@ -3,7 +3,7 @@
 
   <div class="col-md-3">
     <%= image_tag(image_url_for(@user), class: "img-rounded img-responsive no-margin") %>
-    <%= link_to 'Edit Profile', edit_user_path, class: 'btn btn-info btn-block mt' if owner?(@user) %>
+    <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-info btn-block mt' if owner?(@user) %>
     <div class="m5 d-flex jc-center">
       <%= render partial: 'shared/friend_request', locals: {user: @user, rejectable: true} %>
     </div>

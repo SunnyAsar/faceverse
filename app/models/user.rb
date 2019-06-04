@@ -9,9 +9,11 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   after_create :create_profile
+  scope :all_without, ->(user){ where.not(id: user.id)}
+  
+
+
  
-
-
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
@@ -35,6 +37,7 @@ class User < ApplicationRecord
 
   has_many :liked_posts, through: :likes, source: :likeable, source_type: 'Post'
   has_many :liked_comments, through: :likes, source: :likeable, source_type: 'Comment'
+
 
   def friends
     direct_friends + inverse_friends
