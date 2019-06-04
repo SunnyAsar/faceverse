@@ -1,15 +1,15 @@
-<% unless current_user.friend?(user.id) || current_user.friend_requested?(user.id) || current_user == user  %>
+<% unless current_user.friend?(user.id) || current_user.friend_requested?(user.id) || current_user.friend_requesting?(user.id) || current_user == user  %>
   <%= form_for(:friend_request, url: friend_requests_path) do |f| %>
     <%= f.hidden_field :receiver_id, value: user.id %>
     <%= f.submit "Add Friend", class: "btn btn-primary" %>
   <% end %>
-  <% if rejectable %>
-    <%= form_for(:friend_request, url: friend_request_path(user), method: :delete, data: {confirm: "Are you sure?"}) do |f| %>
-      <%= f.hidden_field :receiver_id, value: user.id %>
-      <%= f.submit "Reject Request", class: "btn btn-danger ml" %>
-    <% end %>
-  <% end %>
 <% end %>
 <% if current_user.friend_requested?(user.id) %>
-  <span class="btn btn-xs disabled">Firend request sent</span>
+  <span class="btn btn-xs disabled">Friend request sent</span>
+<% elsif current_user.friend_requesting?(user.id) %>
+  <%= form_for(:friendship, url: friendships_path) do |f| %>
+    <%= f.hidden_field :friend_id, value: user.id %>
+    <%= f.submit "Accept Friend", class: "btn btn-success" %>
+  <% end %>
+  <%= link_to('Reject Request', current_user.request_from(user.id), data: {confirm:'Are you sure?'},  method: :delete, class: "btn btn-danger ml" ) %>
 <% end %>

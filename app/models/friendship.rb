@@ -1,5 +1,6 @@
 class Friendship < ApplicationRecord
   before_create :order_params
+  after_create :delete_this_request
 
   belongs_to :user
   belongs_to :friend, class_name: 'User'
@@ -16,8 +17,7 @@ class Friendship < ApplicationRecord
     errors.add(:user_id, "can't create relationship with itself") if user_id == friend_id
   end
 
-  # def existing_friendship?()
-
-  # end
-
+  def delete_this_request
+    FriendRequest.related(user_id, friend_id).first&.destroy
+  end
 end

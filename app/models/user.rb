@@ -10,10 +10,10 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   after_create :create_profile
   scope :all_without, ->(user){ where.not(id: user.id)}
-  
 
 
- 
+
+
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
@@ -55,16 +55,8 @@ class User < ApplicationRecord
     friends_requesting.pluck(:id).include?(user_id)
   end
 
-  def send_friend_request(user_id)
-    sent_requests.create(receiver_id: user_id)
-  end
-
-  def delete_friend_request(user_id)
-    received_requests.where(sender_id: user_id).first.destroy
-  end
-
-  def add_friend(user_id)
-    direct_friendships.create(friend_id: user_id)
+  def request_from(user_id)
+    received_requests.where(sender_id: user_id).first
   end
 
   def friend_requests
@@ -91,7 +83,6 @@ class User < ApplicationRecord
     likes.for(comment_id, 'Comment')
   end
 
-
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -109,9 +100,9 @@ class User < ApplicationRecord
   end
 
   private
+
   def create_profile
     Profile.create(user: self)
     puts 'creating profile .....'
   end
-
 end

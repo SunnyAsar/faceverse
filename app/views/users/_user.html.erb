@@ -10,6 +10,8 @@
         </div>
       </div>
     <% end %>
-    <%= render partial: 'shared/friend_request', locals: {user: user, rejectable: local_assigns[:rejectable]} %>
+    <div class="no-shrink d-flex">
+      <%= render partial: 'shared/friend_request', locals: { user: user } %>
+    </div>
   </div>
 </li>

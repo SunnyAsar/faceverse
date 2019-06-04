@@ -41,7 +41,6 @@ a {
   border-bottom: 1px solid rgba(0,0,0,0.2);
   a {
     color: black;
-    max-width: 80%;
   }
   .name{
     margin-right: 50px;
@@ -57,6 +56,10 @@ a {
   align-items: center;
   img {
     max-width: 64px;
+  }
+  .media-body {
+    width: auto;
+    flex: 1;
   }
 }
 
@@ -126,6 +129,10 @@ a {
   &.jc-between {
     justify-content: space-between;
   }
+}
+
+.no-shrink {
+  flex-shrink: 0;
 }
 
 .text-white {
