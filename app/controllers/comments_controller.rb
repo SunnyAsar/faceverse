@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :require_permission, only: %i[edit update destroy]
+  before_action :set_comment, only: %i[edit update destroy]
+  before_action(only: %i[edit update destroy]) { require_permission(@comment.commenter) }
 
   def create
     @comment = current_user.comments.build(comment_params)
@@ -42,11 +43,8 @@ class CommentsController < ApplicationController
 
   private
 
-  def require_permission
+  def set_comment
     @comment = Comment.find(params[:id])
-    return if @comment.commenter == current_user
-
-    flash[:alert] = 'You have no permission'
-    redirect_to @coment.post
   end
+
 end

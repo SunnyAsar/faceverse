@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  before_action :require_permission, only: %i[edit update destroy]
+  before_action :set_post, only: %i[edit update destroy]
+
 
   def index
     @post = Post.new
@@ -54,11 +55,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content)
   end
 
-  def require_permission
+  def set_post
     @post = Post.find(params[:id])
-    return if @post.author == current_user
-
-    flash[:alert] = 'You have no permission'
-    redirect_back fallback_location: root_path
+    require_permission(@post.author)
   end
 end
