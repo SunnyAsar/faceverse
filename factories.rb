@@ -7,6 +7,16 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     password { 'foobar' }
     password_confirmation { 'foobar' }
+
+    factory :user_with_friends do
+      transient { count { 3 } }
+    
+      after :create do |user, vars|
+        FactoryBot.create_list(:friendship, vars.count, user: user)
+      end
+    end
+    
+
   end
 
   factory :post do

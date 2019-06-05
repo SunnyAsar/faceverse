@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   context 'testing Associations' do
     it { should have_many(:posts).dependent(:destroy)}
     it { should have_many(:comments).dependent(:destroy) }
+    it { should have_one(:profile).dependent(:destroy) }
   end
 
   context 'friend_requests' do
@@ -17,11 +18,12 @@ RSpec.describe User, type: :model do
   end
 
   describe 'public instance methods' do
-    let(:user) { create(:user) }
-    context 'respond to its methods' do
-      it { expect(user).to respond_to(:friends) }
-      it { expect(user).to respond_to(:send_friend_request) }
-      it { expect(user).to respond_to(:friend_requests) }
+    let(:user) { create(:user_with_friends) }
+  
+    context 'respond to its instance methods' do
+      describe 'This user should have friends' do 
+       it { expect(user.friends.count).to eq(3) }
+      end
     end
   end
 end
