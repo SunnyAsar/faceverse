@@ -10,13 +10,25 @@ FactoryBot.define do
 
     factory :user_with_friends do
       transient { count { 3 } }
-    
+
       after :create do |user, vars|
-        FactoryBot.create_list(:friendship, vars.count, user: user)
+        create_list(:friendship, vars.count, user: user)
       end
     end
-    
 
+    factory :user_with_relations do
+      transient do
+        friends_count { 3 }
+        sent_friend_requests_count { 3 }
+        received_friend_requests_count { 3 }
+      end
+
+      after :create do |user, vars|
+        create_list(:friendship, vars.friends_count, user: user)
+        create_list(:friend_request, vars.sent_friend_requests_count, sender: user)
+        create_list(:friend_request, vars.received_friend_requests_count, receiver: user)
+      end
+    end
   end
 
   factory :post do

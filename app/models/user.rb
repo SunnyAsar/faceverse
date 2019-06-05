@@ -103,6 +103,5 @@ class User < ApplicationRecord
 
   def create_profile
     Profile.create(user: self)
-    puts 'creating profile .....'
   end
 end
