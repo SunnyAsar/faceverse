@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h1>News Feed </h1>
+
+  <div class="row">
+    <%= render 'form' %>
+  </div>
+  <div class="row">
+    <ul>
+      <%= render(@posts) || 'No posts available' %>
+    </ul>
+  </div>
+</div>
+<p>Find me in app/views/posts/index.html.erb</p>
