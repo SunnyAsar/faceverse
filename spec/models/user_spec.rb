@@ -72,14 +72,32 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'for post and it likes' do
+    context 'for post, comments and their likes' do
       let(:user) do
-        create(:user_with_posts_and_likes)
+        create(:user_with_posts_comments_and_likes)
       end
 
-      it 'user have 3 posts' do
-        expect(user.posts.count).to eq(3)
+      it '#likes_post? return fale for posts not liked' do
+        post = create(:post)
+        expect(user.likes_post?(post.id)).to eq(false)
       end
+
+      it '#likes_post? return true for a liked post' do
+        post = user.liked_posts.first 
+        expect(user.likes_post?(post.id)).to eq(true)
+      end
+
+      it '#likes_comment? return true for comments liked by user' do 
+        comment = user.liked_comments.first
+        expect(user.likes_comment?(comment.id)).to be true
+      end
+
+      it '#comment_like return valid like instance' do
+        expect(user.comment_like(user.liked_comments.first.id)).to be_a Like
+      end
+
+
     end
+
   end
 end

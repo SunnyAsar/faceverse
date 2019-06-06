@@ -22,15 +22,18 @@ FactoryBot.define do
       end
     end
 
-    factory :user_with_posts_and_likes do
+    factory :user_with_posts_comments_and_likes do
       transient do
         posts_count { 3 }
         liked_count { 3 }
+        comment_count { 3 }
       end
 
       after :create do |user, vars|
         create_list(:post_with_likes, vars.posts_count, author: user)
         create_list(:like, vars.liked_count, :for_post, liker: user)
+        create_list(:like, vars.liked_count, :for_comment, liker: user)
+        create_list(:comment_with_likes, vars.comment_count, commenter: user)
       end
     end
   end
@@ -59,6 +62,12 @@ FactoryBot.define do
 
     factory :invalid_comment do
       content { '' }
+    end
+
+    factory :comment_with_likes do
+      after :create do |comment|
+        create_list(:like, 2, :for_comment, likeable: comment)
+      end
     end
   end
 
