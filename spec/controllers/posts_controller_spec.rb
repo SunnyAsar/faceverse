@@ -48,7 +48,7 @@ RSpec.describe PostsController, type: :controller do
       expect{
         delete :destroy, params: { id: @post }
       }.to change(Post,:count).by(-1)
-      expect(response.success?)
+      expect(response.successful?)
       redirect_to :index
     end
   end

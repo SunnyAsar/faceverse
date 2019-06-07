@@ -18,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET #show' do
     it 'return the details of a user' do
       get :show, params: {id: @user}
-      expect(response.success?)
+      expect(response.successful?)
       expect(assigns(:user)).to eql(@user)
       expect(response).to render_template :show
     end
