@@ -25,10 +25,31 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe 'POST #Create' do
+  describe 'POST #create' do
     it 'creates a new post' do
-      post :create, params:  { post: attributes_for(:post, author: @user)}
+      post :create, params: { post: attributes_for(:post, author: @user) }
       expect(response).to redirect_to root_path 
+    end
+  end
+
+  describe 'PATCH #update' do
+    it 'should update the post content' do 
+      put :update, params: {id: @post, post: attributes_for(:post, content: "HEllo world") }
+      @post.reload
+      expect(assigns(:post)).to eq(@post)
+      expect(@post.content).to eq("HEllo world")
+      redirect_to @post
+    end
+  end
+
+
+  describe 'DELETE #destroy' do
+    it 'should destroy the post' do 
+      expect{
+        delete :destroy, params: { id: @post }
+      }.to change(Post,:count).by(-1)
+      expect(response.successful?)
+      redirect_to :index
     end
   end
 
