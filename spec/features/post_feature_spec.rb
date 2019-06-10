@@ -1,22 +1,39 @@
 require 'rails_helper'
-RSpec.describe 'Posts', type: :feature do 
+RSpec.describe "Testing post", type: :feature do
+  before :each do
+    @user = create(:user)
+    sign_in @user
+    @post = create(:post, author: @user)
+  end
 
-  describe "The post creation process" do 
-    before :each do 
-      user = create(:user)
-      sign_in user
+
+  it 'creates a post from valid content' do
+    visit root_path
+    expect(page).to have_content 'News Feed'
+    within('#new_post') do 
+      fill_in 'post_content', with: 'hello new post here'
     end
+    click_button 'Create Post'
+    expect(page).to have_content 'Post created'
+  end
 
-    it 'creates a post from the provided content' do
-      visit posts_path
-      expect(page).to have_content 'News Feed'
-
-      # within('form') do 
-      #   fill_in content: 'hello new post here'
-      # end
-      # click_button 'Create Post'
-      # expect(page).to have_content 'Post created'
+  it 'fails to create post with invalid content' do 
+    visit root_path
+    within('#new_post') do 
+      fill_in 'post_content', with: ' '
     end
+    click_button 'Create Post'
+    expect(page).to have_content "Content can't be blank"
+  end
+
+
+  it 'deletes a post' do
+    visit root_path
+    expect(page).to have_link('Destroy', href:"/posts/#{@post.id}")
+    accept_alert do
+      click_link('Destroy', href:"/posts/#{@post.id}")
+    end
+    expect(page).to have_current_path(root_path)
   end
 
 end

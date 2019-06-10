@@ -16,7 +16,7 @@ class PostsController < ApplicationController
       flash[:success] = 'Post created'
       redirect_back fallback_location: root_path
     else
-      @posts = Post.feed_for(current_user)
+      @posts = Post.feed_for(current_user).paginate(page: params[:page])
       render 'index'
     end
   end
