@@ -9,11 +9,11 @@ RSpec.describe FriendRequestsController, type: :controller do
   end
 
 
-  describe 'GET #index' do 
+  describe 'GET #index' do
     it 'resturns the list of friend requests' do
       get :index
       expect(response.successful?)
-      expect(assigns(:requests)).to eq(@user.friend_requests)
+      expect(assigns(:requests)).to eq(@user.friends_requesting)
     end
   end
 

@@ -11,9 +11,6 @@ class User < ApplicationRecord
   after_create :create_profile
   scope :all_without, ->(user){ where.not(id: user.id)}
 
-
-
-
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
@@ -43,24 +40,12 @@ class User < ApplicationRecord
     direct_friends + inverse_friends
   end
 
-  def friend?(user_id)
-    friends.map(&:id).include?(user_id)
+  def friend?(user)
+    friends.map(&:id).include?(user.id)
   end
 
-  def friend_requested?(user_id)
-    friends_requested.pluck(:id).include?(user_id)
-  end
-
-  def friend_requesting?(user_id)
-    friends_requesting.pluck(:id).include?(user_id)
-  end
-
-  def request_from(user_id)
-    received_requests.where(sender_id: user_id).first
-  end
-
-  def friend_requests
-    friends_requesting
+  def request_from(user)
+    received_requests.where(sender_id: user.id).first
   end
 
   def full_name

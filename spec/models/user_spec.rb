@@ -40,35 +40,15 @@ RSpec.describe User, type: :model do
       end
 
       it '#friend? returns True for a friend id' do
-        expect(user.friend?(friend_user.id)).to be true
+        expect(user.friend?(friend_user)).to be true
       end
 
       it '#friend? returns False if is not a friend id' do
-        expect(user.friend?(unrelated_user.id)).to be false
-      end
-
-      it '#friend_requested? returns True for a requested friend id' do
-        expect(user.friend_requested?(requested_user.id)).to be true
-      end
-
-      it '#friend_requested? returns False if is not a requested friend id' do
-        expect(user.friend_requested?(unrelated_user.id)).to be false
-      end
-
-      it '#friend_requesting? returns True for a requesting friend id' do
-        expect(user.friend_requesting?(requesting_user.id)).to be true
-      end
-
-      it '#friend_requesting? returns False if is not a requesting friend id' do
-        expect(user.friend_requesting?(unrelated_user.id)).to be false
+        expect(user.friend?(unrelated_user)).to be false
       end
 
       it '#request_from returns the friend_request instance that relate the users' do
         expect(user.request_from(requesting_user.id)).to be_a FriendRequest
-      end
-
-      it '#friend_requests returns users requesting friendship' do
-        expect(user.friend_requests).to eq user.friends_requesting
       end
     end
 
@@ -83,11 +63,11 @@ RSpec.describe User, type: :model do
       end
 
       it '#likes_post? return true for a liked post' do
-        post = user.liked_posts.first 
+        post = user.liked_posts.first
         expect(user.likes_post?(post.id)).to eq(true)
       end
 
-      it '#likes_comment? return true for comments liked by user' do 
+      it '#likes_comment? return true for comments liked by user' do
         comment = user.liked_comments.first
         expect(user.likes_comment?(comment.id)).to be true
       end
@@ -95,9 +75,6 @@ RSpec.describe User, type: :model do
       it '#comment_like return valid like instance' do
         expect(user.comment_like(user.liked_comments.first.id)).to be_a Like
       end
-
-
     end
-
   end
 end
