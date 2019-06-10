@@ -48,7 +48,7 @@ RSpec.describe User, type: :model do
       end
 
       it '#request_from returns the friend_request instance that relate the users' do
-        expect(user.request_from(requesting_user.id)).to be_a FriendRequest
+        expect(user.request_from(requesting_user)).to be_a FriendRequest
       end
     end
 
