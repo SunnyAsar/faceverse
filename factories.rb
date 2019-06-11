@@ -10,9 +10,9 @@ FactoryBot.define do
 
     factory :user_with_relations do
       transient do
-        friends_count { 3 }
-        sent_friend_requests_count { 3 }
-        received_friend_requests_count { 3 }
+        friends_count { 1 }
+        sent_friend_requests_count { 1 }
+        received_friend_requests_count { 1 }
       end
 
       after :create do |user, vars|
@@ -24,9 +24,9 @@ FactoryBot.define do
 
     factory :user_with_posts_comments_and_likes do
       transient do
-        posts_count { 3 }
-        liked_count { 3 }
-        comment_count { 3 }
+        posts_count { 1 }
+        liked_count { 1 }
+        comment_count { 1 }
       end
 
       after :create do |user, vars|
@@ -47,7 +47,7 @@ FactoryBot.define do
     end
 
     factory :post_with_likes do
-      transient { count { 3 } }
+      transient { count { 1 } }
 
       after :create do |post, vars|
         create_list(:like, vars.count, :for_post, likeable: post)
