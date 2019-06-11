@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
-RSpec.describe "The Commenting Process", type: :feature do 
+RSpec.describe 'The Commenting Process', type: :feature do
   before :each do
     @user = create(:user)
     sign_in @user
@@ -7,13 +9,13 @@ RSpec.describe "The Commenting Process", type: :feature do
     @comment = create(:comment, commenter: @user, post: @post)
   end
 
-  it 'creates a comment' do 
+  it 'creates a comment' do
     visit root_path
     expect(page).to have_content 'News Feed'
-    click_link(" ", href: post_path(@post))
+    click_link(' ', href: post_path(@post))
     expect(page).to have_content 'Commnets'
     within('#new_comment') do
-    fill_in 'comment_content', with: 'hello new comment to post'
+      fill_in 'comment_content', with: 'hello new comment to post'
     end
     click_button 'Create Comment'
     expect(page).to have_content 'Comment successful'
@@ -30,7 +32,14 @@ RSpec.describe "The Commenting Process", type: :feature do
     end
     click_button 'Update Comment'
     expect(page).to have_content 'comment updated'
-
   end
 
+  it 'deletes a post comment' do
+    visit post_path(@post)
+    expect(page).to have_link('Destroy', href: comment_path(@comment))
+    accept_alert do
+      click_link 'Destroy', href: comment_path(@comment)
+    end
+    expect(page).to have_content 'Comment deleted'
+  end
 end
