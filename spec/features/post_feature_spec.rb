@@ -11,6 +11,7 @@ RSpec.describe "Testing post", type: :feature do
     expect(page).to have_content 'News Feed'
     within('#new_post') do
       fill_in 'post_content', with: 'hello new post here'
+      sleep(3)
     end
     click_button 'Create Post'
     expect(page).to have_content 'Post created'
@@ -20,20 +21,32 @@ RSpec.describe "Testing post", type: :feature do
     visit root_path
     within('#new_post') do
       fill_in 'post_content', with: ' '
+      sleep(3)
     end
     click_button 'Create Post'
     expect(page).to have_content "Content can't be blank"
   end
 
-  # scenario js: true do
-    it 'deletes a post' do
-      visit root_path
-      expect(page).to have_link('Destroy', href: post_path(@post))
-      accept_alert do
-        click_link('Destroy', href: post_path(@post))
-      end
-      expect(page).to have_current_path(root_path)
+  it 'edits the content of a post' do
+    # visit edit_post_path(@post)
+    visit root_path
+    click_link('Edit', href:edit_post_path(@post))
+    expect(page).to have_content 'Edit Post'
+    within('form') do
+      fill_in 'post_content', with: 'new post content'
     end
-  # end
+    click_button 'Update Post'
+    expect(page).to have_content "Post updated"
+  end
+
+  it 'deletes a post' do
+    visit root_path
+    expect(page).to have_link('Destroy', href: post_path(@post))
+    accept_alert do
+      sleep(3)
+      click_link('Destroy', href: post_path(@post))
+    end
+    expect(page).to have_current_path(root_path)
+  end
 
 end
