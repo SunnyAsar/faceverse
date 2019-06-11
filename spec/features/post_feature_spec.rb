@@ -11,7 +11,6 @@ RSpec.describe "Testing post", type: :feature do
     expect(page).to have_content 'News Feed'
     within('#new_post') do
       fill_in 'post_content', with: 'hello new post here'
-      sleep(3)
     end
     click_button 'Create Post'
     expect(page).to have_content 'Post created'
@@ -21,7 +20,6 @@ RSpec.describe "Testing post", type: :feature do
     visit root_path
     within('#new_post') do
       fill_in 'post_content', with: ' '
-      sleep(3)
     end
     click_button 'Create Post'
     expect(page).to have_content "Content can't be blank"
@@ -43,7 +41,6 @@ RSpec.describe "Testing post", type: :feature do
     visit root_path
     expect(page).to have_link('Destroy', href: post_path(@post))
     accept_alert do
-      sleep(3)
       click_link('Destroy', href: post_path(@post))
     end
     expect(page).to have_current_path(root_path)
