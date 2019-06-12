@@ -1,0 +1,37 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "FaceVerse", root_url, class: "navbar-brand" %>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'Home', root_url %></li>
+        <li><%= link_to 'Users', users_path  %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+
+        <li>
+        <%= link_to( friend_requests_path) do %>
+        <button class="btn btn-info btn-xs" type="button"> <%= 'Request'.pluralize(current_user.friends_requesting.count)  %> <span class="badge"> <%= current_user.friends_requesting.count %> </span></button>
+           <li><%= link_to current_user.first_name, current_user  %></li>
+        <% end %>
+        </li>
+
+        <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'Sign up', new_user_registration_path %></li>
+          <li><%= link_to 'Sign in', new_user_session_path %></li>
+          <li><%= link_to user_facebook_omniauth_authorize_path, class: "bg-primary text-white" do %><i class="fa fa-facebook-f fa-lg"></i> Sign in <% end %></li>
+
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

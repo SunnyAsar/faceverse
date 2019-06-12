@@ -1,33 +1,52 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
-  # before_action :set_post, only: [:edit, :update, :destroy]
-  # before_action :require_permission, only: :destroy
+  before_action :set_post, only: %i[edit update destroy]
+
 
   def index
-    @posts = Post.feed_for(current_user)
+    @post = Post.new
+    @like = Like.new
+    @posts = Post.feed_for(current_user).paginate(page: params[:page])
   end
 
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = 'Post created'
-      redirect_to root_url
+      redirect_back fallback_location: root_path
     else
-      flash.now[:alert] = 'Unable to create post, try to add content before post'
-      @posts = Post.feed_for(current_user)
+      @posts = Post.feed_for(current_user).paginate(page: params[:page])
       render 'index'
     end
   end
 
-  def destroy
-    post = Post.find(params[:id])
-    res = post.destroy if post.author == current_user
-    if res
-      flash[:success] = 'Deleted successfully !'
-      redirect_to root_url
+  def show
+    @comment = Comment.new
+    @post = Post.find_by_id(params[:id])
+    return redirect_to root_url if @post.nil?
+
+    @comments = @post.comments.paginate(page: params[:page])
+  end
+
+  def edit; end
+
+  def update
+    if @post.update_attributes(post_params)
+      flash[:success] = 'Post updated'
+      redirect_to @post
     else
-      flash.now[:alert] = " sorry Not deleted..."
-      redirect_to root_url
+      render 'edit'
     end
+  end
+
+  def destroy
+    if @post.destroy
+      flash[:success] = 'Deleted successfully !'
+    else
+      flash[:alert] = 'sorry Not deleted...'
+    end
+    redirect_back fallback_location: root_path
   end
 
   private
@@ -38,12 +57,6 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+    require_permission(@post.author)
   end
-
-  def require_permission
-    if current_user != @post.user
-      redirect_to root_path
-    end
-  end
-  
 end

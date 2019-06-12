@@ -1,0 +1,14 @@
+<% if user.request_from(current_user) %>
+  <span class="btn btn-xs disabled">Friend request sent</span>
+<% elsif current_user.request_from(user) %>
+  <%= form_for(:friendship, url: friendships_path) do |f| %>
+    <%= f.hidden_field :friend_id, value: user.id %>
+    <%= f.submit "Accept Friend", class: "btn btn-success" %>
+  <% end %>
+  <%= link_to('Reject Request', current_user.request_from(user), data: {confirm:'Are you sure?'},  method: :delete, class: "btn btn-danger text-white ml" ) %>
+<% elsif !current_user.friend?(user) && current_user != user %>
+  <%= form_for(:friend_request, url: friend_requests_path) do |f| %>
+    <%= f.hidden_field :receiver_id, value: user.id %>
+    <%= f.submit "Add Friend", class: "btn btn-primary" %>
+  <% end %>
+<% end %>

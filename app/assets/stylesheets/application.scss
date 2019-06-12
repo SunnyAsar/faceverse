@@ -1,0 +1,144 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+a {
+  color: black;
+  display: inline-block;
+}
+
+.no-decoration {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.no-margin {
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.friend-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  a {
+    color: black;
+  }
+  .name{
+    margin-right: 50px;
+  }
+  form {
+    margin-right: 10px;
+  }
+}
+
+.media {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  img {
+    max-width: 64px;
+  }
+  .media-body {
+    width: auto;
+    flex: 1;
+  }
+}
+
+.post {
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.comment {
+  .content {
+    text-decoration: none;
+    color: black;
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  &:last-child {
+    border-bottom: none;
+  }
+  .name {
+    font-weight: bold;
+  }
+  .stats{
+    color: teal;
+    display: flex;
+    *{
+      &:first-child {
+        padding-right: 2px;
+      }
+      padding-right: 10px;
+    }
+  }
+  .owner-options {
+    flex-shrink: 0;
+  }
+}
+
+.pt {
+  padding-top: 10px;
+}
+
+.ml {
+  margin-left: 5px;
+}
+
+.mt {
+  margin-top: 5px;
+}
+
+.m5 {
+  margin: 5px;
+}
+
+.w-100 {
+  width: 100%
+}
+
+.d-flex {
+  display: flex;
+  &.jc-center {
+    justify-content: center;
+  }
+  &.jc-between {
+    justify-content: space-between;
+  }
+}
+
+.no-shrink {
+  flex-shrink: 0;
+}
+
+.text-white {
+  color: white!important;
+}
+
+.likes {
+  display: flex;
+}

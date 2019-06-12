@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  # scope :pagination, ->{ paginate(page: params[:page], per_page: 3 }
+
   validates :content, presence: true
 
   default_scope -> { order(created_at: :desc) }

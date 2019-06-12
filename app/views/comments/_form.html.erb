@@ -1,0 +1,10 @@
+<%= form_for(@comment) do |f| %>
+  <%= render 'shared/errors', object: f.object %>
+
+  <div class='form-group '>
+  <%= f.hidden_field :post_id, value: @post.id %>
+  <%= f.label :content, 'make your comment here' %>
+  <%= f.text_area :content, class:'form-control' %>
+  </div>
+  <%= f.submit class: 'btn btn-primary btn-lg pull-right' %>
+<% end %>

@@ -1,13 +1,14 @@
 <div class="page-header">
   <h1>News Feed </h1>
-
   <div class="row">
     <%= render 'form' %>
   </div>
-  <div class="row">
-    <ul>
+  <div class="row pt">
+  <%= will_paginate @posts, renderer: BootstrapPagination::Rails  %>
+    <ul class="no-decoration">
       <%= render(@posts) || 'No posts available' %>
     </ul>
+  <%= will_paginate @posts, renderer: BootstrapPagination::Rails  %>
   </div>
 </div>
 <p>Find me in app/views/posts/index.html.erb</p>

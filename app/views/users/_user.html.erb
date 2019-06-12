@@ -1,0 +1,17 @@
+<li>
+  <div class="friend-row">
+    <%= link_to user do %>
+      <div class="media">
+        <div class="media-left">
+          <%= image_tag(image_url_for(user), class: "img-rounded") %>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading name"><%= user.full_name %></h4>
+        </div>
+      </div>
+    <% end %>
+    <div class="no-shrink d-flex">
+      <%= render partial: 'shared/friend_request', locals: { user: user } %>
+    </div>
+  </div>
+</li>

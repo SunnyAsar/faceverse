@@ -1,0 +1,7 @@
+<div class="page-header">
+<%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+<div class= "row">
+  <ul class="no-decoration"> <%= render @users %> </ul>
+</div>
+<%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+</div>

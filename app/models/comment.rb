@@ -6,4 +6,6 @@ class Comment < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 
   validates :content, presence: true
+
+  default_scope -> { order(created_at: :desc) }
 end

@@ -11,7 +11,9 @@ gem 'bootstrap-generators'
 gem 'devise-bootstrap-views'
 gem 'record_tag_helper'
 gem 'table_print'
-
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
+gem 'omniauth-facebook'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -73,7 +75,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
 
   gem 'shoulda-matchers'
   gem 'shoulda-callback-matchers'
