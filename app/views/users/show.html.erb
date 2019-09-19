@@ -1,0 +1,34 @@
+<div class="row">
+
+
+  <div class="col-md-3">
+    <%= image_tag(image_url_for(@user), class: "img-rounded img-responsive no-margin") %>
+    <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-info btn-block mt' if owner?(@user) %>
+    <div class="m5 d-flex jc-center">
+      <%= render partial: 'shared/friend_request', locals: {user: @user, rejectable: true} %>
+    </div>
+    <div class="text-center">
+      <h3> <%= @user.full_name %> </h3>
+      <%= age_for(@user) %>,
+      <%= @user.profile.country || 'No Country Yet'%>
+    </div>
+
+
+  </div>
+
+  <div class="col-md-6">
+    <h3> <%= pluralize(@user.posts.count, 'post')  %> </h3>
+    <ul class="no-decoration">
+      <%= render @user.posts.take(5) %>
+    </ul>
+  </div>
+
+  <div class="col-md-3">
+    <h4> Friends </h4>
+    <ul class="no-decoration">
+      <%= render @user.friends.take(5) %>
+    </ul>
+  </div>
+
+
+</div>

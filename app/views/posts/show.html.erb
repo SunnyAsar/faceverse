@@ -1,0 +1,17 @@
+<div class="page-header row">
+  <ul class="no-decoration">
+    <%= render @post %>
+  </ul>
+</div>
+<h3> Commnets </h3>
+<%= will_paginate @comments, renderer: BootstrapPagination::Rails%>
+<div class="row">
+  <%= render 'comments/form' %>
+</div>
+<%= will_paginate @comments, renderer: BootstrapPagination::Rails%>
+<div class="row">
+
+  <ul class="no-decoration">
+    <%=render @comments %>
+  </ul>
+</div>

@@ -1,0 +1,7 @@
+<%= form_for(@post) do |f| %>
+  <%= render 'shared/errors', object: f.object %>
+  <div class="form-group">
+    <%= f.text_area :content, class: "form-control", placeholder: "What's on your mind", rows: '7' %>
+  </div>
+  <%= f.submit class: "btn btn-primary btn-lg pull-right" %>
+<% end %>

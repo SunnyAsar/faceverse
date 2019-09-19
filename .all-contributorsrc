@@ -1,0 +1,35 @@
+{
+  "projectName": "faceverse",
+  "projectOwner": "SunnyAsar",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "SunnyAsar",
+      "name": "SunnyAsar",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/10922508?v=4",
+      "profile": "https://github.com/SunnyAsar",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "HenryTabima",
+      "name": "Henry Tabima Giraldo",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/12721896?v=4",
+      "profile": "http://henrytabima.com",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
