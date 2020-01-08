@@ -1,6 +1,5 @@
 # Faceverse
-
-This is a minmal version of facbook built in Ruby on Rails [corresponding section in Odin project](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project)
+This is a minimal version of facebook built in Ruby on Rails.
 
 ![faceverse screenshot](docs/faceverse.png)
 
@@ -72,8 +71,8 @@ You can deploy the project on [Heroku](https://www.heroku.com/) using the follow
 
 1. Create a Heroku Account
 2. On the terminal, run `heroku create` to create a new app
-3. Run `heroku push` to start a deployment on Heroku.
-4. Run `heroku migrate` to run migrations on your production database.
+3. Run `git push heroku master` to start a deployment on Heroku.
+4. Run `heroku run rail db:migrate` to run migrations on your production database.
 5. Visit your project URL as assigned by Heroku to see a live deployment of Fakebook.
 
 ## Contributors
