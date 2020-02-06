@@ -1,5 +1,5 @@
 # Faceverse
-This is a minimal version of facebook built in Ruby on Rails.
+This is a minimal cloned version of Facebook built in Ruby on Rails.
 
 ![faceverse screenshot](docs/faceverse.png)
 
@@ -17,7 +17,7 @@ Example:
 
 ![ruby version example](docs/ruby-v.png)
 
-Also make sure that Rails is installed, but running `rails -v`.
+Also, make sure that Rails is installed, but running `rails -v`.
 Example:
 
 ![rails version example](docs/rails-v.png)
@@ -49,7 +49,7 @@ Populate development data:
 rails dev:populate
 ```
 
-### Start development server
+### Start the development server
 
 Run the server with the following command:
 
